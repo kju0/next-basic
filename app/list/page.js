@@ -6,7 +6,8 @@ export default function List() {
     // db에서 데이터 가져왔다고 가정
     let 상품 = ['Tomatoes', 'Pasta', 'Coconut']
     let array = [2,3,4]
-    let [수량, 수량변경] = useState(0) //변수 말고 state 이용
+    let [수량, 수량변경] = useState([0, 0, 0]) //변수 말고 state 이용, 수량변경은 함수!
+    let copy = [...수량];
 
     // map함수 실습
     array.map((a, i) => {
@@ -26,8 +27,13 @@ export default function List() {
                     {/* 버전1 */}
                     <img src={`/food${i}.png`} className='food-img'/>
                     <h4>{상품[i]} $40</h4>
-                    <span>{수량}</span>
-                    <button onMouseOver={()=>{console.log(1)}}>+</button>
+                    <span>{수량[i]}</span>
+                    <button onClick={()=>{
+                        copy[i]++;
+                        수량변경(copy)}}>+</button>
+                    <button onClick={()=>{
+                        if (copy[i]>0){copy[i]--} 
+                        수량변경(copy)}}>-</button>
                 </div>
             )
         })}           
